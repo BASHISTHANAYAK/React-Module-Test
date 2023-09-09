@@ -1,0 +1,19 @@
+.ListPart {
+  width: 20vw;
+  height: 100vh;
+  background-color: whitesmoke;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+h3 {
+  margin-left: 2vw;
+}
+.Create--Button {
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 0.4vw 0.6vw;
+  font-weight: bold;
+  margin-left: 4vw;
+}
