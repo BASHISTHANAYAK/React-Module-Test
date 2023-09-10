@@ -10,7 +10,7 @@ const message = () => {
         Send and receive messages without keeping your phone online. Use Pocket
         Notes on up to 4 linked devices and 1 mobile phone
       </p>
-      <p className='end-to-end-encrypted'><span><img src="" alt="" /></span> end-to-end encrypted</p>
+      <p className='end-to-end-encrypted'><span><i class="fa-solid fa-lock"></i></span> end-to-end encrypted</p>
     </div>
   );
 };
