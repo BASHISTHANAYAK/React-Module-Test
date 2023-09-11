@@ -1,0 +1,97 @@
+.main--container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(97, 94, 90, 0.349);
+  top: 0;
+}
+
+.White--container {
+  width: 30vw;
+  height: 30vh;
+  border: 2px solid transparent;
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  padding: 1px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.new-notes-h3 {
+  margin-left: 2.5vw;
+}
+.Name--input {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 2vw;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+}
+.Name--input > input {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  border-color: rgb(204, 204, 204);
+  height: 70%;
+  width: 50%;
+}
+.Choose-color--container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 2vw;
+  font-weight: bold;
+}
+.Choose-color--container > ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 4px;
+}
+.color-li li {
+  border: 1px solid transparent;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.color-li li:hover {
+  transform: scale(1.1);
+}
+
+#Purple {
+  background-color: rgb(179, 139, 250);
+}
+#pink {
+  background-color: rgb(255, 121, 242);
+}
+#sky {
+  background-color: rgb(67, 230, 252);
+}
+#brown {
+  background-color: rgb(241, 149, 118);
+}
+#blue {
+  background-color: rgb(0, 71, 255);
+}
+#light--blue {
+  background-color: rgb(102, 145, 255);
+}
+.Create--button {
+  position: absolute;
+  bottom: 1vw;
+  right: 1vw;
+  background-color: black;
+  color: white;
+  padding: 0.3vw 3vw;
+  border-radius: 10px;
+  cursor: pointer;
+}
+/* <li id='Purple'></li>
+<li id='pink'></li>
+<li id='sky'></li>
+<li id='brown'></li>
+<li id='blue'></li>
+<li id='light--blue'></li> */
