@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import '../PopUpBox/PopUp.css';
 import './Styles/ListPart.css';
+import UserDetails from '../UserBox/userDetails';
 const List = () => {
   const [create, setCreate] = useState(false);
   const Myref = useRef(null);
@@ -39,11 +40,14 @@ const List = () => {
   //When we click create button
   function NameFun(e) {
     let TyedName = NameRef.current.value;
-    console.log(TyedName);
+    if (TyedName.length >= 1) {
+      console.log(TyedName);
 
-    DataArray.push({ name: TyedName, color: selectedData.color });
-    localStorage.setItem('AllData', JSON.stringify(DataArray));
-    console.log(DataArray);
+      DataArray.push({ name: TyedName, color: selectedData.color });
+      localStorage.setItem('AllData', JSON.stringify(DataArray));
+      console.log(DataArray);
+    }
+    setCreate(false);
   }
 
   return (
@@ -52,6 +56,9 @@ const List = () => {
       <button className="Create--Button" onClick={CLKCreateButton}>
         + Create Notes Group
       </button>
+      {DataArray.map((el) => {
+        return <UserDetails name={el.name} BgColor={el.color} />;
+      })}
 
       {create ? (
         <div className="main--container" ref={Myref}>

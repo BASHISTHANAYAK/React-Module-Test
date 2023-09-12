@@ -1,0 +1,30 @@
+.Details--container {
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 3vw;
+  cursor: pointer;
+  border-radius: 10px 0px 0px 10px;
+  border-right: 1px solid transparent;
+}
+
+.Details--container :hover {
+  transform: scale(1.1);
+}
+
+.User--fName {
+  border: 1px solid transparent;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-left: 1vw;
+}
+.User--fullName {
+  font-weight: 400;
+}
