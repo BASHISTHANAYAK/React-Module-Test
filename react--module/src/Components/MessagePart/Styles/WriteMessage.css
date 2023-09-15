@@ -1,0 +1,53 @@
+.messagessArea {
+  background-color: rgb(247, 236, 220);
+  width: 80vw;
+  height: 60vh;
+  overflow: auto;
+}
+.messagessArea > div {
+  margin: auto;
+  border: 1px solid transparent;
+  width: 45vw;
+  height: 14vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+}
+.messagessArea > div > div:nth-child(1) {
+  border: 1px solid transparent;
+  height: auto;
+  width: auto;
+  line-height: 0.5vh;
+  margin-right:3vw;
+}
+
+.textArea--Div {
+  width: 65vw;
+  height: 35vh;
+  background-color: white;
+  margin: auto;
+  margin-top: 3vh;
+  text-align: center;
+  border-radius: 10px;
+}
+.textArea--Div textarea {
+  width: 98%;
+  height: 95%;
+  border-color: transparent;
+  resize: none;
+  margin-top: 5px;
+}
+.textArea--Div img {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 2vw;
+  right: 8vw;
+  cursor: pointer;
+}
+.textArea--Div img:hover {
+  transform: scale(1.3);
+}
+textarea:focus {
+  outline: none;
+}
