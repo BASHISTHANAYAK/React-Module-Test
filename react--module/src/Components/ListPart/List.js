@@ -2,20 +2,19 @@ import React, { useRef, useState, useEffect } from 'react';
 import '../PopUpBox/PopUp.css';
 import './Styles/ListPart.css';
 import WelcomePart from '../MessagePart/WelcomePart';
-import WriteMessage from '../MessagePart/WriteMessage';
 import UserDetails from '../UserBox/userDetails';
+import '../MessagePart/Styles/WriteMessage.css';
+import TextArea from '../MessagePart/textArea';
+// import PopUp from './PopUp';
 
 const List = () => {
-  //This is joint to popUp
   const [create, setCreate] = useState(false);
-  //This is joint to Welcome page
   const [welcomePage, setWelcomePage] = useState(true);
-  //Pointing to  the input of popup box.
   const NameRef = useRef(null);
-  //Getting name/value and color from popUp Box
   const [selectedData, setSelectedData] = useState({ name: '', color: '' });
-  //For each user box background Color.
   const [userBackgroundColor, setUserBackgroundColor] = useState({});
+  const [selectedUser, setSelectedUser] = useState(null); // Selected user state
+  const [messageContent, setMessageContent] = useState(''); // Message content state
 
   function CLKCreateButton(event) {
     setCreate(!create);
@@ -47,51 +46,128 @@ const List = () => {
     });
   }
 
-  function NameFun(e) {
+  function ClickCreateUser(e) {
     let TyedName = NameRef.current.value;
-    if (TyedName.length >= 1) {
+    if (TyedName.length >= 2) {
       console.log(TyedName);
-
       DataArray.push({ name: TyedName, color: selectedData.color });
       localStorage.setItem('AllData', JSON.stringify(DataArray));
       console.log(DataArray);
-    }
-    setCreate(false);
-  }
 
-  //Function run when  we click the user Name box
+      setCreate(false);
+      setSelectedData((pre) => {
+        return (pre.name = '');
+      });
+    } else {
+      alert('Name length should be >=2');
+    }
+  }
 
   function SelectUser(e, name) {
-    // Create an object to store the background colors
     const updatedUserBackgroundColor = {};
-
-    // Set the background color for the clicked user
-    updatedUserBackgroundColor[name] = '#F7ECDC'; // Brown color
-
-    // Reset the background color for all other users to a default color
-    for (const userName in userBackgroundColor) {
-      if (userName !== name) {
-        updatedUserBackgroundColor[userName] = '#F5F5F5'; // Default color
-      }
-    }
-
-    // Update the state with the new background colors
+    updatedUserBackgroundColor[name] = '#F7ECDC';
     setUserBackgroundColor(updatedUserBackgroundColor);
-
-    // Set welcomePage to false
     setWelcomePage(false);
+    setSelectedUser(name); // Set the selected user
+    setMessageContent(''); // Clear message content when a user is selected
+    localStorage.setItem('UserName', JSON.stringify(name));
   }
 
-  // Render the UserDetails components with their respective background colors
   const userComponents = DataArray.map((el, index) => (
     <UserDetails
       key={index}
       name={el.name}
       BgColor={el.color}
-      onClick={(e) => SelectUser(e, el.name)}
+      onClick={(e) => {
+        SelectUser(e, el.name);
+      }}
       style={{ backgroundColor: userBackgroundColor[el.name] || '#F5F5F5' }}
     />
   ));
+
+  const [areaInputs, setAreaInputs] = useState('');
+  const forTxtArea = useRef(null);
+
+  function CallOnChageValue(e) {
+    let InputData = e.target.value;
+    setAreaInputs(() => {
+      return InputData;
+    });
+  }
+
+  let Alluserdata = JSON.parse(localStorage.getItem('Alluserdata'));
+  if (!Alluserdata) {
+    Alluserdata = [];
+  }
+
+  //when we click send img
+  function ImageCLK() {
+    const saveTxt = areaInputs;
+    const currentTime = new Date();
+    const currentMonth = currentTime.toLocaleString('en-US', { month: 'long' });
+    const currentDate = currentTime.toLocaleString('en-US', { day: 'numeric' });
+    const currentYear = currentTime.toLocaleString('en-US', {
+      year: 'numeric',
+    });
+    const currentTimeString = currentTime.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+
+    let AuserInputs = [];
+    AuserInputs.push(saveTxt);
+
+    const textWithTime = ` ${currentDate}  ${currentMonth} ${currentYear} `;
+
+    let AuserData = {
+      AuserDataName: JSON.parse(localStorage.getItem('UserName')),
+      AuserTime: currentTimeString,
+      AuserDate: textWithTime,
+      AuserInputsValue: AuserInputs,
+    };
+    Alluserdata.push(AuserData);
+
+    localStorage.setItem('Alluserdata', JSON.stringify(Alluserdata));
+
+    setAreaInputs('');
+  }
+
+  function handleKeyPress(e) {
+    if (e.key === 'Enter' && e.shiftKey) {
+      setAreaInputs((pre) => {
+        return pre + '\n';
+      });
+    } else if (e.key === 'Enter') {
+      ImageCLK();
+    }
+  }
+
+  // Loading user-specific data when selectedUser changes
+  useEffect(() => {
+    if (selectedUser) {
+      setMessageContent(
+        Alluserdata.filter((data) => data.AuserDataName === selectedUser).map(
+          (data, index) => (
+            <div key={index}>
+              <div>
+                <div>
+                  <h6>{data.AuserTime}</h6>
+                </div>
+                <div>
+                  <h6>{data.AuserDate}</h6>
+                </div>
+              </div>
+
+              <div>
+                <h5>{data.AuserInputsValue[0]}</h5>
+              </div>
+            </div>
+          )
+        )
+      );
+    }
+  }, [selectedUser, Alluserdata]);
 
   return (
     <>
@@ -101,6 +177,7 @@ const List = () => {
           + Create Notes Group
         </button>
         {userComponents}
+
         {create ? (
           <div className="main--container">
             <div className="White--container">
@@ -140,7 +217,7 @@ const List = () => {
                 </ul>
               </div>
               <br />
-              <button className="Create--button" onClick={NameFun}>
+              <button className="Create--button" onClick={ClickCreateUser}>
                 Create
               </button>
             </div>
@@ -150,7 +227,23 @@ const List = () => {
         )}
       </div>
       {welcomePage ? <WelcomePart /> : ''}
-      {!welcomePage ? <WriteMessage /> : ''}
+      {!welcomePage ? (
+        <div>
+          {/* Display user-specific data */}
+          <div className="messagessArea">
+            {selectedUser ? messageContent : null}
+          </div>
+          <TextArea
+            ref={forTxtArea}
+            value={areaInputs}
+            onChange={CallOnChageValue}
+            onKeyDown={handleKeyPress}
+            IMGonClick={ImageCLK}
+          />
+        </div>
+      ) : (
+        ''
+      )}
     </>
   );
 };

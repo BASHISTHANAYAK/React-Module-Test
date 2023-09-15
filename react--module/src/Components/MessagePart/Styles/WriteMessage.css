@@ -7,18 +7,27 @@
 .messagessArea > div {
   margin: auto;
   border: 1px solid transparent;
-  width: 45vw;
-  height: 14vh;
+  width: 50vw;
+  height: 17vh;
   overflow: auto;
   display: flex;
   align-items: center;
+  margin-top: 5vh;
+  overflow: auto;
 }
 .messagessArea > div > div:nth-child(1) {
   border: 1px solid transparent;
   height: auto;
   width: auto;
-  line-height: 0.5vh;
-  margin-right:3vw;
+  margin-right: 3vw;
+}
+
+.messagessArea > div > div:nth-child(2) {
+  border: 2px solid transparent;
+  height: auto;
+  width: auto;
+  overflow-wrap: break-word;
+  overflow: auto;
 }
 
 .textArea--Div {

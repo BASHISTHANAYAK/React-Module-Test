@@ -23,3 +23,11 @@
   margin: auto;
   margin-top: 20vh;
 }
+@media screen and (max-width: 562px) {
+  .WelcomePage {
+    width: 60vw;
+  }
+}
+@media screen and (max-width: 415px) {
+  
+}
